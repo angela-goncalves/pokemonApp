@@ -1,6 +1,10 @@
 import { JsonDB, Config } from "node-json-db";
+import { NextApiResponse, NextApiRequest } from "next";
 
-export default async function handler(req, res) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   const db = new JsonDB(new Config("db", true, false, "/"));
   if (req.method === "GET") {
     var data = await db.getData("/catchedPokemon");

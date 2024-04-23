@@ -1,5 +1,5 @@
 {
-  "name": "frontend-test",
+  "name": "my-app",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,20 +9,22 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@chakra-ui/next-js": "^2.2.0",
     "@chakra-ui/react": "^2.8.2",
-    "@emotion/react": "^11.11.1",
-    "@emotion/styled": "^11.11.0",
-    "axios": "^1.6.1",
-    "framer-motion": "^10.16.4",
-    "next": "14.0.2",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "axios": "^1.6.8",
+    "framer-motion": "^11.1.7",
+    "next": "14.2.2",
     "node-json-db": "^2.3.0",
     "react": "^18",
-    "react-dom": "^18",
-    "react-icons": "^4.11.0"
+    "react-dom": "^18"
   },
   "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
     "eslint": "^8",
-    "eslint-config-next": "14.0.2"
+    "eslint-config-next": "14.2.2",
+    "typescript": "^5"
   }
 }

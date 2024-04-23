@@ -1,6 +1,10 @@
 import { JsonDB, Config } from "node-json-db";
+import { NextApiResponse, NextApiRequest } from "next";
 
-export default async function handler(req, res) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
   const db = new JsonDB(new Config("db", true, false, "/"));
 
   if (req.method === "GET") {
@@ -10,7 +14,7 @@ export default async function handler(req, res) {
 
     return res
       .status(200)
-      .json(data.some((pokemon) => pokemon.id === Number(pokemonId)));
+      .json(data.some((pokemon: any) => pokemon.id === Number(pokemonId)));
   } else if (req.method === "DELETE") {
     try {
       const query = req.query;

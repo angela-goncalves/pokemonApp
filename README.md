@@ -1,10 +1,8 @@
-# Pokémon Test
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-El objetivo de la app es listar todos los Pokémon y mostrar información de los mismos al clickear sobre ellos. También la app mostrará de alguna forma los Pokémon que el usuario tiene capturados.
+## Getting Started
 
-## Comenzando
-
-Correr servidor de desarrollo:
+First, run the development server:
 
 ```bash
 npm run dev
@@ -16,81 +14,23 @@ pnpm dev
 bun dev
 ```
 
-## Objetivos
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-- Limpiar el proyecto template y detectar errores o mejoras.
-- Optimizar la app en cuanto accesibilidad.
-- Integrar la API interna para mostar que Pokémon tiene capturados el usuario.
-- Terminar de integrar la API de [PokeApi](https://pokeapi.co/docs/v2#info) para que la app cumpla con todo lo que pide el enunciado.
-- Hacer mejoras de UX / UI que considere pertinentes.
-- Optimizar diseño responsive.
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-### Anotaciones
+This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-- Cualquier mejora no especificada previamente será valorada.
-- Ante una duda con el enunciado, tomar una decisión y resolver como crea pertinente.
-- Si tiene problemas con la base de datos interna puede renombrar el archivo `db-example.json` a `db.json` para comenzar de 0.
+## Learn More
 
-### Documentación útil
+To learn more about Next.js, take a look at the following resources:
 
-- [Next.JS](https://nextjs.org/docs)
-- [Chakra UI](https://chakra-ui.com/getting-started)
-- [PokeAPI](https://pokeapi.co/docs/v2#info)
-- [Axios](https://axios-http.com/es/docs/intro)
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-## API Pokémon atrapados
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-### Obtener todos los Pokémon atrapados.
+## Deploy on Vercel
 
-#### Request
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-`GET /api/catched`
-
-#### Response
-
-```json
-[
-  {
-    "id": 1,
-    "name": "bulbasaur"
-  },
-  {
-    "id": 2,
-    "name": "venasaur"
-  }
-]
-```
-
-### Atrapar un Pokémon.
-
-#### Request
-
-`POST /api/catched`
-
-#### Body
-
-```json
-{
-  "id": 1,
-  "name": "bulbasaur"
-}
-```
-
-#### Reponse
-
-```json
-{
-  "id": 1,
-  "name": "bulbasaur"
-}
-```
-
-### Eliminar un Pokémon atrapado.
-
-#### Request
-
-`DELETE /api/catched/{pokemonId}`
-
-#### Reponse
-
-`HTTP STATUS 200`
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
