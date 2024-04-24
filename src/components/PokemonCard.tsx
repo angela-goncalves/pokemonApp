@@ -28,7 +28,7 @@ export default function PokemonCard({ pokemon }: IPokemonCard) {
         {pokemon.name}
       </Text>
       <HStack flexDirection="row" wrap="wrap" spacing="2">
-        {pokemon.types.map((type: any) => (
+        {pokemon.types?.map((type: any) => (
           <Badge size="xs" key={type.slot} borderRadius="sm">
             {type.type.name}
           </Badge>

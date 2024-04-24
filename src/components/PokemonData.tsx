@@ -174,7 +174,7 @@ export default function PokemonData({ pokemon, isCatched }: IPokemonData) {
                   Tipos
                 </Text>
                 <HStack flexDirection="row" wrap="wrap" spacing="2">
-                  {pokemon.types.map((item: any, index: number) => (
+                  {pokemon.types?.map((item: any, index: number) => (
                     <Text
                       key={`${item.type.name}${index}`}
                       textTransform="capitalize"
@@ -186,7 +186,7 @@ export default function PokemonData({ pokemon, isCatched }: IPokemonData) {
               </Stack>
             </Stack>
 
-            {pokemon.stats.map((item: any, index: number) => (
+            {pokemon.stats?.map((item: any, index: number) => (
               <Stack
                 key={index}
                 spacing="5"
