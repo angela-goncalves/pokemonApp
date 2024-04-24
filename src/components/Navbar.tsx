@@ -20,7 +20,6 @@ import {
 import { deletePokemon } from "@/lib/actions/delete";
 import Image from "next/image";
 import Link from "next/link";
-import theme from "../app/theme";
 
 export default function Navbar({ pokemons }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
