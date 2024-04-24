@@ -1,109 +1,200 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   AspectRatio,
   Image,
   Stack,
-  SimpleGrid,
-  Heading,
-  Tabs,
-  TabList,
-  TabPanels,
-  TabPanel,
   Progress,
   Text,
-  Tab,
   Badge,
   HStack,
   Checkbox,
+  Button,
+  Center,
+  Flex,
 } from "@chakra-ui/react";
-import { useFormState } from "react-dom";
-import { catchedPokemon } from "@/app/actions/postdb";
-import axios from "axios";
+import {
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
+} from "@chakra-ui/react";
+import { catchPokemon } from "@/lib/actions/postdb";
 
 interface IPokemonData {
   pokemon: any;
+  isCatched: boolean;
 }
 
-export default function PokemonData({ pokemon }: IPokemonData) {
-  // const [state, formAction] = useFormState(catchedPokemon, { message: "" });
-  // console.log("state", state);
-  const handleChange = async () => {
-    return fetch("/api/catched", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        id: pokemon.id,
-        name: pokemon.name,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("data to post", data);
-      })
-      .catch((error) => {
-        console.error("Error posting data", error);
-      });
-  };
+export default function PokemonData({ pokemon, isCatched }: IPokemonData) {
+  const [resSuccess, setResSuccess] = useState<string>("");
 
+  const handleChange = async () => {
+    const pokemonToCatch = {
+      id: pokemon.id,
+      name: pokemon.name,
+    };
+    const response = await catchPokemon(pokemonToCatch);
+
+    if (response === "success") {
+      await setResSuccess(response);
+    }
+  };
+  console.log(pokemon);
   return (
-    <div>
-      <Stack spacing="5" pb="5">
-        <Stack spacing="5" position="relative">
-          <Box position="absolute" right="0" zIndex="99">
-            {/* <form action={formAction}> */}
-            <Checkbox name="chatch" onChange={handleChange}>
-              Catched
-            </Checkbox>
-            {/* </form> */}
+    <Center
+      w="100vw"
+      h="100%"
+      overflowY="scroll"
+      padding={{ base: "12px", sm: "20px", md: "40px" }}>
+      <Flex
+        w="100%"
+        h="100%"
+        // maxWidth={{ base: "100%"}}
+        flexDirection={"column"}
+        alignItems="center"
+        justifyContent="center"
+        paddingTop={{ base: "20px" }}>
+        {resSuccess === "success" && (
+          <Alert status="success">
+            <AlertIcon />
+            <AlertTitle>Your pokemon was catched!</AlertTitle>
+            {/* <AlertDescription>
+            Your Chakra experience may be degraded.
+          </AlertDescription> */}
+          </Alert>
+        )}
+        <Text fontSize="3xl" pb="10">
+          {pokemon.name}
+        </Text>
+        <Stack
+          direction={["column-reverse", "row"]}
+          spacing="8"
+          alignItems="center">
+          <Image
+            width={100}
+            height={100}
+            style={{ width: "180px", height: "auto" }}
+            // src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${pokemon.id}.png`}
+            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/${pokemon.id}.gif`}
+            alt={`${pokemon.name}'s image`}
+          />
+          <Box>
+            {isCatched ? (
+              <Text
+                px="5"
+                py="2"
+                border="1px"
+                borderRadius="8px"
+                borderColor="orange.600"
+                fontSize="md"
+                fontWeight={700}
+                color="gray.800">
+                Is catched!
+              </Text>
+            ) : (
+              <Button name="chatch" onClick={handleChange}>
+                Catch
+              </Button>
+            )}
           </Box>
-          <AspectRatio w="full" ratio={1}>
-            <Image
-              width={100}
-              height={100}
-              style={{ width: "150px", height: "auto" }}
-              // src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${pokemon.id}.png`}
-              src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/${pokemon.id}.gif`}
-              alt={`${pokemon.name}'s image`}
-            />
-          </AspectRatio>
-          <Stack direction="row" spacing="5">
-            <Stack>
-              <Text fontSize="sm">Weight</Text>
-              <Text>20</Text>
+        </Stack>
+        <Stack
+          w="full"
+          spacing="5"
+          pt="6"
+          maxWidth={{ base: "100%", lg: "50%" }}>
+          <Stack spacing="5" p="5" maxWidth={{ base: "max-content" }}>
+            <Stack direction={["column", "row"]} spacing="5">
+              <Stack direction="column">
+                <Text
+                  px="2"
+                  borderBottom="1px"
+                  borderBottomColor="orange.800"
+                  fontSize="md"
+                  fontWeight={700}
+                  color="gray.800">
+                  Peso
+                </Text>
+                <Text>{pokemon.weight} lb</Text>
+              </Stack>
+              <Stack direction="column">
+                <Text
+                  px="2"
+                  borderBottom="1px"
+                  borderBottomColor="orange.800"
+                  fontSize="md"
+                  fontWeight={700}
+                  color="gray.800">
+                  Altura
+                </Text>
+                <Text>{pokemon.height} ft</Text>
+              </Stack>
+              <Stack direction="column">
+                <Text
+                  px="2"
+                  borderBottom="1px"
+                  borderBottomColor="orange.800"
+                  fontSize="md"
+                  fontWeight={700}
+                  color="gray.800">
+                  Movimientos
+                </Text>
+                <Text>{pokemon.moves.length}</Text>
+              </Stack>
+              <Stack direction="column">
+                <Text
+                  px="2"
+                  borderBottom="1px"
+                  borderBottomColor="orange.800"
+                  fontSize="md"
+                  fontWeight={700}
+                  color="gray.800">
+                  Experiencia
+                </Text>
+                <Text>{pokemon.base_experience}</Text>
+              </Stack>
             </Stack>
             <Stack>
-              <Text fontSize="sm">Height</Text>
-              <Text>12</Text>
-            </Stack>
-            <Stack>
-              <Text fontSize="sm">Movimientos</Text>
-              <Text>109</Text>
-            </Stack>
-            <Stack>
-              <Text fontSize="sm">Tipos</Text>
-              <HStack>
-                <Badge>Agua</Badge>
-                <Badge>Agua</Badge>
+              <Text
+                px="2"
+                borderBottom="1px"
+                borderBottomColor="orange.800"
+                fontSize="md"
+                fontWeight={700}
+                color="gray.800">
+                Tipos
+              </Text>
+              <HStack flexDirection="row" wrap="wrap" spacing="2">
+                {pokemon.types.map((item: any, index: number) => (
+                  <Text key={`${item.type.name}${index}`}>
+                    {item.type.name}
+                  </Text>
+                ))}
               </HStack>
             </Stack>
           </Stack>
-        </Stack>
 
-        <Stack spacing="5" p="5" bg="gray.100" borderRadius="xl">
-          <Stack>
-            <Text fontSize="xs">hp</Text>
-            <Progress bg="gray.300" borderRadius="full" value={80} />
-          </Stack>
-          <Stack>
-            <Text fontSize="xs">attack</Text>
-            <Progress bg="gray.300" borderRadius="full" value={65} />
-          </Stack>
+          {pokemon.stats.map((item: any, index: number) => (
+            <Stack
+              key={index}
+              spacing="5"
+              p="5"
+              bg="gray.100"
+              borderRadius="xl">
+              <Stack w="100%">
+                <Text fontSize="xs">{item.stat.name}</Text>
+                <Progress
+                  bg="gray.300"
+                  borderRadius="full"
+                  value={item.base_stat}
+                />
+              </Stack>
+            </Stack>
+          ))}
         </Stack>
-      </Stack>
-    </div>
+      </Flex>
+    </Center>
   );
 }
