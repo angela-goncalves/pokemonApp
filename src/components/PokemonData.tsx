@@ -44,7 +44,7 @@ export default function PokemonData({ pokemon, isCatched }: IPokemonData) {
       h="100%"
       overflowY="scroll"
       padding={{ base: "12px", sm: "20px", md: "40px" }}>
-      {pokemon.name ? (
+      {pokemon?.name ? (
         <Flex
           w="100%"
           h="100%"

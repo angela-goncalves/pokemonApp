@@ -56,7 +56,7 @@ export default function Navbar({ pokemons }: any) {
           <DrawerHeader>Mis pokemones</DrawerHeader>
 
           <DrawerBody>
-            {pokemons.map((pokemon: any, index: number) => (
+            {pokemons?.map((pokemon: any, index: number) => (
               <Stack direction={"column"} key={pokemon.id} pb="8">
                 <Stack direction={"row"} justifyContent={"space-between"}>
                   <Stack>
