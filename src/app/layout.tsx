@@ -21,12 +21,14 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const pokemons = await pokemonbyUser();
-
+  if (!pokemons) {
+    <div>Sorry, something went wrong</div>;
+  }
   return (
     <html lang="en">
       <body className={inter.className} style={{ background: "black" }}>
         <ChakraProvider>
-          <Navbar pokemons={pokemons} />
+          <Navbar pokemons={pokemons || []} />
           {children}
         </ChakraProvider>
       </body>
