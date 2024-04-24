@@ -208,7 +208,9 @@ export default function PokemonData({ pokemon, isCatched }: IPokemonData) {
           </Stack>
         </Flex>
       ) : (
-        <div>Sorry, We cannot show the pokemon right now. Try later</div>
+        <Text color="red.200">
+          Sorry, We cannot show the pokemon right now. Try later
+        </Text>
       )}
     </Center>
   );

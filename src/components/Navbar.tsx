@@ -26,8 +26,7 @@ export default function Navbar({ pokemons }: any) {
   const btnRef = React.useRef(null);
 
   const handleDelete = async (id: string) => {
-    const deleteRes = await deletePokemon(id);
-    console.log(deleteRes);
+    await deletePokemon(id);
   };
 
   return (
@@ -65,7 +64,6 @@ export default function Navbar({ pokemons }: any) {
                       height={100}
                       style={{ width: "180px", height: "auto" }}
                       src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${pokemon.id}.png`}
-                      // src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/${pokemon.id}.gif`}
                       alt={`${pokemon.name}'s image`}
                     />
                     <Text>{pokemon.name}</Text>
@@ -80,12 +78,6 @@ export default function Navbar({ pokemons }: any) {
               </Stack>
             ))}
           </DrawerBody>
-
-          {/* <DrawerFooter>
-            <Button variant="outline" mr={3} onClick={onClose}>
-              Cancel
-            </Button>
-          </DrawerFooter> */}
         </DrawerContent>
       </Drawer>
     </Stack>
