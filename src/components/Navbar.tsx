@@ -55,28 +55,32 @@ export default function Navbar({ pokemons }: any) {
           <DrawerHeader>Mis pokemones</DrawerHeader>
 
           <DrawerBody>
-            {pokemons?.map((pokemon: any, index: number) => (
-              <Stack direction={"column"} key={pokemon.id} pb="8">
-                <Stack direction={"row"} justifyContent={"space-between"}>
-                  <Stack>
-                    <Image
-                      width={100}
-                      height={100}
-                      style={{ width: "180px", height: "auto" }}
-                      src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${pokemon.id}.png`}
-                      alt={`${pokemon.name}'s image`}
-                    />
-                    <Text>{pokemon.name}</Text>
+            {pokemons[0]?.error ? (
+              <></>
+            ) : (
+              pokemons?.map((pokemon: any, index: number) => (
+                <Stack direction={"column"} key={pokemon.id} pb="8">
+                  <Stack direction={"row"} justifyContent={"space-between"}>
+                    <Stack>
+                      <Image
+                        width={100}
+                        height={100}
+                        style={{ width: "180px", height: "auto" }}
+                        src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${pokemon.id}.png`}
+                        alt={`${pokemon.name}'s image`}
+                      />
+                      <Text>{pokemon.name}</Text>
+                    </Stack>
+                    <Button
+                      onClick={() => handleDelete(pokemon.id)}
+                      alignSelf={"end"}>
+                      x
+                    </Button>
                   </Stack>
-                  <Button
-                    onClick={() => handleDelete(pokemon.id)}
-                    alignSelf={"end"}>
-                    x
-                  </Button>
+                  <Divider />
                 </Stack>
-                <Divider />
-              </Stack>
-            ))}
+              ))
+            )}
           </DrawerBody>
         </DrawerContent>
       </Drawer>
