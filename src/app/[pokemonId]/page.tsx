@@ -1,6 +1,7 @@
 import PokemonData from "@/components/PokemonData";
 import React from "react";
-import { getPokemonById } from "../actions/getdb";
+import { getPokemonById, pokemonCatched } from "../../lib/actions/getdb";
+import { Stack } from "@chakra-ui/react";
 
 export default async function PokemonId({
   params,
@@ -8,10 +9,12 @@ export default async function PokemonId({
   params: { pokemonId: string };
 }) {
   const pokemon = await getPokemonById(params.pokemonId);
+  const isPokemonCatched = await pokemonCatched(params.pokemonId);
 
   return (
-    <div>
-      <PokemonData pokemon={pokemon} />
-    </div>
+    <PokemonData
+      pokemon={pokemon}
+      isCatched={isPokemonCatched === "true" ?? false}
+    />
   );
 }

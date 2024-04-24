@@ -41,7 +41,7 @@ export default function PokemonData({ pokemon, isCatched }: IPokemonData) {
       await setResSuccess(response);
     }
   };
-  console.log(pokemon);
+
   return (
     <Center
       w="100vw"
@@ -51,7 +51,6 @@ export default function PokemonData({ pokemon, isCatched }: IPokemonData) {
       <Flex
         w="100%"
         h="100%"
-        // maxWidth={{ base: "100%"}}
         flexDirection={"column"}
         alignItems="center"
         justifyContent="center"
@@ -60,12 +59,13 @@ export default function PokemonData({ pokemon, isCatched }: IPokemonData) {
           <Alert status="success">
             <AlertIcon />
             <AlertTitle>Your pokemon was catched!</AlertTitle>
-            {/* <AlertDescription>
-            Your Chakra experience may be degraded.
-          </AlertDescription> */}
           </Alert>
         )}
-        <Text fontSize="3xl" pb="10">
+        <Text
+          fontSize="3xl"
+          pb="10"
+          textTransform="capitalize"
+          color="gray.100">
           {pokemon.name}
         </Text>
         <Stack
@@ -76,7 +76,6 @@ export default function PokemonData({ pokemon, isCatched }: IPokemonData) {
             width={100}
             height={100}
             style={{ width: "180px", height: "auto" }}
-            // src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/${pokemon.id}.png`}
             src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/${pokemon.id}.gif`}
             alt={`${pokemon.name}'s image`}
           />
@@ -87,10 +86,10 @@ export default function PokemonData({ pokemon, isCatched }: IPokemonData) {
                 py="2"
                 border="1px"
                 borderRadius="8px"
-                borderColor="orange.600"
+                borderColor="orange.100"
                 fontSize="md"
                 fontWeight={700}
-                color="gray.800">
+                color="gray.100">
                 Is catched!
               </Text>
             ) : (
@@ -111,64 +110,67 @@ export default function PokemonData({ pokemon, isCatched }: IPokemonData) {
                 <Text
                   px="2"
                   borderBottom="1px"
-                  borderBottomColor="orange.800"
+                  borderBottomColor="orange.100"
                   fontSize="md"
                   fontWeight={700}
-                  color="gray.800">
+                  color="gray.100">
                   Peso
                 </Text>
-                <Text>{pokemon.weight} lb</Text>
+                <Text color="gray.100">{pokemon.weight} lb</Text>
               </Stack>
               <Stack direction="column">
                 <Text
                   px="2"
                   borderBottom="1px"
-                  borderBottomColor="orange.800"
+                  borderBottomColor="orange.100"
                   fontSize="md"
                   fontWeight={700}
-                  color="gray.800">
+                  color="gray.100">
                   Altura
                 </Text>
-                <Text>{pokemon.height} ft</Text>
+                <Text color="gray.100">{pokemon.height} ft</Text>
               </Stack>
               <Stack direction="column">
                 <Text
                   px="2"
                   borderBottom="1px"
-                  borderBottomColor="orange.800"
+                  borderBottomColor="orange.100"
                   fontSize="md"
                   fontWeight={700}
-                  color="gray.800">
+                  color="gray.100">
                   Movimientos
                 </Text>
-                <Text>{pokemon.moves.length}</Text>
+                <Text color="gray.100">{pokemon.moves.length}</Text>
               </Stack>
               <Stack direction="column">
                 <Text
                   px="2"
                   borderBottom="1px"
-                  borderBottomColor="orange.800"
+                  borderBottomColor="orange.100"
                   fontSize="md"
                   fontWeight={700}
-                  color="gray.800">
+                  color="gray.100">
                   Experiencia
                 </Text>
-                <Text>{pokemon.base_experience}</Text>
+                <Text color="gray.100">{pokemon.base_experience}</Text>
               </Stack>
             </Stack>
             <Stack>
               <Text
                 px="2"
                 borderBottom="1px"
-                borderBottomColor="orange.800"
+                borderBottomColor="orange.100"
                 fontSize="md"
                 fontWeight={700}
-                color="gray.800">
+                color="gray.100">
                 Tipos
               </Text>
               <HStack flexDirection="row" wrap="wrap" spacing="2">
                 {pokemon.types.map((item: any, index: number) => (
-                  <Text key={`${item.type.name}${index}`}>
+                  <Text
+                    key={`${item.type.name}${index}`}
+                    textTransform="capitalize"
+                    color="gray.100">
                     {item.type.name}
                   </Text>
                 ))}
@@ -184,7 +186,9 @@ export default function PokemonData({ pokemon, isCatched }: IPokemonData) {
               bg="gray.100"
               borderRadius="xl">
               <Stack w="100%">
-                <Text fontSize="xs">{item.stat.name}</Text>
+                <Text fontSize="xs" textTransform="capitalize">
+                  {item.stat.name}
+                </Text>
                 <Progress
                   bg="gray.300"
                   borderRadius="full"

@@ -1,17 +1,12 @@
-import styles from "./page.module.css";
-import { getPokemon } from "@/app/actions/getdb";
-import HomePage from "@/components/Home";
+import { getPokemon } from "@/lib/actions/getdb";
+import PokemonsList from "@/components/PokemonsList";
 
-export default async function Home({
-  searchParams,
-}: {
-  searchParams: { page: string };
-}) {
-  const pokemons = await getPokemon(Number(searchParams.page || "1"));
+export default async function Home() {
+  const pokemons = await getPokemon(0);
 
   return (
-    <main className={styles.main}>
-      <HomePage pokemons={pokemons} page={searchParams.page || "1"} />
+    <main>
+      <PokemonsList initialPokemons={pokemons} />
     </main>
   );
 }
