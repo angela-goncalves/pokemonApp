@@ -1,7 +1,7 @@
 import PokemonData from "@/components/PokemonData";
 import React from "react";
 import { getPokemonById, pokemonCatched } from "../../lib/actions/getdb";
-import { Stack } from "@chakra-ui/react";
+import { Stack, Text } from "@chakra-ui/react";
 
 export default async function PokemonId({
   params,
@@ -11,10 +11,10 @@ export default async function PokemonId({
   const pokemon = await getPokemonById(params.pokemonId);
   const isPokemonCatched = await pokemonCatched(params.pokemonId);
 
-  if (pokemon.message || isPokemonCatched.includes("error")) {
+  if (!pokemon || isPokemonCatched?.includes("error")) {
     <div>
-      <p>{`Sorry, something went wrong trying to show the ${params.pokemonId} pokemon`}</p>
-      <p>{pokemon.message || isPokemonCatched}</p>
+      <Text color="red.200">{`Sorry, something went wrong trying to show the ${params.pokemonId} pokemon`}</Text>
+      <p>{isPokemonCatched ?? ""}</p>
     </div>;
   }
 

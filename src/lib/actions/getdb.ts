@@ -49,6 +49,6 @@ export const pokemonbyUser = async () => {
 
   const { data, error } = await supabase.from("catched").select();
 
-  if (error) return { error: `${error}` };
+  if (error) return [{ error: `${error}` }];
   return data;
 };

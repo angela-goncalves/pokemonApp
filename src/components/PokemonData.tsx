@@ -44,7 +44,7 @@ export default function PokemonData({ pokemon, isCatched }: IPokemonData) {
       h="100%"
       overflowY="scroll"
       padding={{ base: "12px", sm: "20px", md: "40px" }}>
-      {pokemon.name ? (
+      {pokemon?.name ? (
         <Flex
           w="100%"
           h="100%"
@@ -174,7 +174,7 @@ export default function PokemonData({ pokemon, isCatched }: IPokemonData) {
                   Tipos
                 </Text>
                 <HStack flexDirection="row" wrap="wrap" spacing="2">
-                  {pokemon.types.map((item: any, index: number) => (
+                  {pokemon.types?.map((item: any, index: number) => (
                     <Text
                       key={`${item.type.name}${index}`}
                       textTransform="capitalize"
@@ -186,7 +186,7 @@ export default function PokemonData({ pokemon, isCatched }: IPokemonData) {
               </Stack>
             </Stack>
 
-            {pokemon.stats.map((item: any, index: number) => (
+            {pokemon.stats?.map((item: any, index: number) => (
               <Stack
                 key={index}
                 spacing="5"
@@ -208,7 +208,9 @@ export default function PokemonData({ pokemon, isCatched }: IPokemonData) {
           </Stack>
         </Flex>
       ) : (
-        <div>Sorry, We cannot show the pokemon right now. Try later</div>
+        <Text color="red.200">
+          Sorry, We cannot show the pokemon right now. Try later
+        </Text>
       )}
     </Center>
   );
