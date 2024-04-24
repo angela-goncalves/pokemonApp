@@ -31,15 +31,11 @@ export default function PokemonData({ pokemon, isCatched }: IPokemonData) {
   const [resSuccess, setResSuccess] = useState<string>("");
 
   const handleChange = async () => {
-    const pokemonToCatch = {
+    const response = await catchPokemon({
       id: pokemon.id,
       name: pokemon.name,
-    };
-    const response = await catchPokemon(pokemonToCatch);
-
-    if (response === "success") {
-      await setResSuccess(response);
-    }
+    });
+    await setResSuccess(response);
   };
 
   return (
@@ -59,6 +55,17 @@ export default function PokemonData({ pokemon, isCatched }: IPokemonData) {
           <Alert status="success">
             <AlertIcon />
             <AlertTitle>Your pokemon was catched!</AlertTitle>
+          </Alert>
+        )}
+        {resSuccess.includes("error") && (
+          <Alert status="error">
+            <AlertIcon />
+            <AlertTitle>
+              Sorry, something went wrong trying to catch the pokemon.
+            </AlertTitle>
+            <AlertDescription>
+              Please, refresh the page and try again
+            </AlertDescription>
           </Alert>
         )}
         <Text

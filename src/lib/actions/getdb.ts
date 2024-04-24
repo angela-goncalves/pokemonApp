@@ -5,30 +5,28 @@ import { createClient } from "../supabase/server";
 
 export const getPokemon = async (offset: number): Promise<any[]> => {
   try {
-    return axios
-      .get(`https://pokeapi.co/api/v2/pokemon/?limit=20&offset=${offset}`)
-      .then(async ({ data }) => {
-        const promises = data.results.map((result: any) => axios(result.url));
-        const fetchedPokemon = (await Promise.all(promises)).map(
-          (res) => res.data
-        );
-
-        return fetchedPokemon;
-      });
+    const response = await fetch(
+      `https://pokeapi.co/api/v2/pokemon/?limit=20&offset=${offset}`
+    );
+    const data = await response.json();
+    const promises = await data.results.map((result: any) => axios(result.url));
+    const fetchedPokemon = (await Promise.all(promises)).map((res) => res.data);
+    return fetchedPokemon;
   } catch (error) {
-    throw new Error(`${error}`);
+    return [{ message: `${error}` }];
   }
 };
 
 export const getPokemonById = async (pokemonId: string) => {
-  return axios
-    .get(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`)
-    .then(({ data }) => {
-      return data;
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+  try {
+    const response = await fetch(
+      `https://pokeapi.co/api/v2/pokemon/${pokemonId}`
+    );
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    return { message: `${error}` };
+  }
 };
 
 export const pokemonCatched = async (pokemonid: string) => {

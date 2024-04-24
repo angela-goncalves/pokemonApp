@@ -30,7 +30,7 @@ const PokemonsList = ({ initialPokemons }: IHomePage) => {
       <Container maxW="container.lg">
         <Stack p="5" alignItems="center" spacing="5">
           <SimpleGrid spacing="5" columns={{ base: 1, sm: 3, lg: 5 }}>
-            {pokemons.map((pokemon) => (
+            {pokemons?.map((pokemon) => (
               <Link
                 href={`/${pokemon.id}`}
                 key={pokemon.id}
