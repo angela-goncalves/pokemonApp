@@ -20,3 +20,9 @@ pnpm dev
 # or
 bun dev
 ```
+
+
+```
+Usuario de prueba:
+email: demopokemon@gmail.com
+constraseña: 123456789```
