@@ -1,15 +1,12 @@
 "use client";
 import React from "react";
 import {
-  Container,
   Stack,
-  SimpleGrid,
   Flex,
   Button,
   Text,
   Drawer,
   DrawerBody,
-  DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
   DrawerContent,
@@ -20,8 +17,9 @@ import {
 import { deletePokemon } from "@/lib/actions/delete";
 import Image from "next/image";
 import Link from "next/link";
+import image from "/public/ball.png";
 
-export default function Navbar({ pokemons }: any) {
+export default function Navbar({ pokemons, user }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef(null);
 
@@ -32,17 +30,47 @@ export default function Navbar({ pokemons }: any) {
   return (
     <Stack>
       <Flex
-        direction={"row"}
+        direction={["column", "row"]}
         justifyContent={"space-between"}
         py="6"
         px="20"
         alignItems={"center"}>
         <Link href="/" style={{ fontWeight: 800, color: "#FEEBC8" }}>
-          Pokemon-test
+          Pokedex
         </Link>
-        <Button ref={btnRef} bg="orange.200" onClick={onOpen}>
-          Mis pokemones
-        </Button>
+        {user ? (
+          <Button ref={btnRef} bg="orange.200" onClick={onOpen} py="6" px="2">
+            <Image
+              src={image}
+              alt="pokeball to see catched pokemons"
+              width={40}
+              height={40}
+            />
+          </Button>
+        ) : (
+          <Stack direction={"row"} color="white" alignItems={"center"}>
+            <Link
+              href="/login"
+              style={{
+                border: "1px solid white",
+                padding: "8px",
+                borderRadius: "8px",
+              }}>
+              Login
+            </Link>
+            <Link
+              href="signup"
+              style={{
+                border: "none",
+                padding: "8px",
+                borderRadius: "8px",
+                background: "white",
+                color: "black",
+              }}>
+              Signup
+            </Link>
+          </Stack>
+        )}
       </Flex>
       <Drawer
         isOpen={isOpen}
@@ -55,11 +83,11 @@ export default function Navbar({ pokemons }: any) {
           <DrawerHeader>Mis pokemones</DrawerHeader>
 
           <DrawerBody>
-            {pokemons[0]?.error ? (
+            {pokemons.length === 0 ? (
               <></>
             ) : (
               pokemons?.map((pokemon: any, index: number) => (
-                <Stack direction={"column"} key={pokemon.id} pb="8">
+                <Stack direction={"column"} key={pokemon.id + index} pb="8">
                   <Stack direction={"row"} justifyContent={"space-between"}>
                     <Stack>
                       <Image

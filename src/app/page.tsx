@@ -1,5 +1,6 @@
 import { getPokemon } from "@/lib/actions/getdb";
 import PokemonsList from "@/components/PokemonsList";
+import { Stack } from "@chakra-ui/react";
 
 export default async function Home() {
   const pokemons = await getPokemon(0);
@@ -12,8 +13,8 @@ export default async function Home() {
   }
 
   return (
-    <main>
+    <Stack w="100%" direction={"row"} justifyContent={"center"}>
       <PokemonsList initialPokemons={pokemons} />
-    </main>
+    </Stack>
   );
 }
