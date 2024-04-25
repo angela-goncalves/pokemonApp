@@ -46,9 +46,21 @@ export const pokemonCatched = async (pokemonid: string) => {
 export const pokemonbyUser = async () => {
   const cookieStore = cookies();
   const supabase = createClient(cookieStore);
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
-  const { data, error } = await supabase.from("catched").select();
+  if (user !== null) {
+    const user_id = user !== null ? user.id : null;
 
-  if (error) return [{ error: `${error}` }];
-  return data;
+    const { data, error } = await supabase
+      .from("catched")
+      .select()
+      .eq("user_id", user_id);
+
+    if (error) return [{ error: `${error}` }];
+    return data;
+  }
+
+  return [{ error: "There are no pokemos" }];
 };

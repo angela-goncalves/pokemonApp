@@ -21,6 +21,7 @@ import {
   AlertDescription,
 } from "@chakra-ui/react";
 import { catchPokemon } from "@/lib/actions/postdb";
+import image from "/public/ball.png";
 
 interface IPokemonData {
   pokemon: any;
@@ -34,6 +35,7 @@ export default function PokemonData({ pokemon, isCatched }: IPokemonData) {
     const response = await catchPokemon({
       id: pokemon.id,
       name: pokemon.name,
+      user_id: "",
     });
     await setResSuccess(response);
   };
@@ -43,13 +45,24 @@ export default function PokemonData({ pokemon, isCatched }: IPokemonData) {
       w="100vw"
       h="100%"
       overflowY="scroll"
-      padding={{ base: "12px", sm: "20px", md: "40px" }}>
+      padding={{ base: "12px", sm: "20px", md: "40px" }}
+      flexDirection="column">
+      <Text
+        fontSize="3xl"
+        pb="10"
+        textTransform="capitalize"
+        color="gray.100"
+        fontWeight="bold">
+        {pokemon?.name}
+      </Text>
       {pokemon?.name ? (
         <Flex
           w="100%"
           h="100%"
-          flexDirection={"column"}
+          direction={["column"]}
           alignItems="center"
+          bg="white"
+          rounded="3xl"
           justifyContent="center"
           paddingTop={{ base: "20px" }}>
           {resSuccess === "success" && (
@@ -64,22 +77,11 @@ export default function PokemonData({ pokemon, isCatched }: IPokemonData) {
               <AlertTitle>
                 Sorry, something went wrong trying to catch the pokemon.
               </AlertTitle>
-              <AlertDescription>
-                Please, refresh the page and try again
-              </AlertDescription>
+              <AlertDescription>{resSuccess}</AlertDescription>
             </Alert>
           )}
-          <Text
-            fontSize="3xl"
-            pb="10"
-            textTransform="capitalize"
-            color="gray.100">
-            {pokemon.name}
-          </Text>
-          <Stack
-            direction={["column-reverse", "row"]}
-            spacing="8"
-            alignItems="center">
+
+          <Stack direction={["column"]} spacing="8" alignItems="center">
             <Image
               width={100}
               height={100}
@@ -94,15 +96,15 @@ export default function PokemonData({ pokemon, isCatched }: IPokemonData) {
                   py="2"
                   border="1px"
                   borderRadius="8px"
-                  borderColor="orange.100"
+                  borderColor="orange.700"
                   fontSize="md"
                   fontWeight={700}
-                  color="gray.100">
+                  color="gray.800">
                   Is catched!
                 </Text>
               ) : (
-                <Button name="chatch" onClick={handleChange}>
-                  Catch
+                <Button name="chatch" onClick={handleChange} colorScheme="red">
+                  🖐️ catch!
                 </Button>
               )}
             </Box>
@@ -110,67 +112,67 @@ export default function PokemonData({ pokemon, isCatched }: IPokemonData) {
           <Stack
             w="full"
             spacing="5"
-            pt="6"
+            py="8"
             maxWidth={{ base: "100%", lg: "50%" }}>
             <Stack spacing="5" p="5" maxWidth={{ base: "max-content" }}>
               <Stack direction={["column", "row"]} spacing="5">
                 <Stack direction="column">
                   <Text
                     px="2"
-                    borderBottom="1px"
-                    borderBottomColor="orange.100"
+                    borderBottom="2px"
+                    borderBottomColor="gray.400"
                     fontSize="md"
                     fontWeight={700}
-                    color="gray.100">
+                    color="gray.600">
                     Peso
                   </Text>
-                  <Text color="gray.100">{pokemon.weight} lb</Text>
+                  <Text color="gray.600">{pokemon.weight} lb</Text>
                 </Stack>
                 <Stack direction="column">
                   <Text
                     px="2"
-                    borderBottom="1px"
-                    borderBottomColor="orange.100"
+                    borderBottom="2px"
+                    borderBottomColor="gray.400"
                     fontSize="md"
                     fontWeight={700}
-                    color="gray.100">
+                    color="gray.600">
                     Altura
                   </Text>
-                  <Text color="gray.100">{pokemon.height} ft</Text>
+                  <Text color="gray.600">{pokemon.height} ft</Text>
                 </Stack>
                 <Stack direction="column">
                   <Text
                     px="2"
-                    borderBottom="1px"
-                    borderBottomColor="orange.100"
+                    borderBottom="2px"
+                    borderBottomColor="gray.400"
                     fontSize="md"
                     fontWeight={700}
-                    color="gray.100">
+                    color="gray.600">
                     Movimientos
                   </Text>
-                  <Text color="gray.100">{pokemon.moves.length}</Text>
+                  <Text color="gray.600">{pokemon.moves.length}</Text>
                 </Stack>
                 <Stack direction="column">
                   <Text
                     px="2"
-                    borderBottom="1px"
-                    borderBottomColor="orange.100"
+                    borderBottom="2px"
+                    borderBottomColor="gray.400"
                     fontSize="md"
                     fontWeight={700}
-                    color="gray.100">
+                    color="gray.600">
                     Experiencia
                   </Text>
-                  <Text color="gray.100">{pokemon.base_experience}</Text>
+                  <Text color="gray.600">{pokemon.base_experience}</Text>
                 </Stack>
               </Stack>
               <Stack>
                 <Text
                   px="2"
-                  borderBottom="1px"
-                  borderBottomColor="orange.100"
+                  borderBottom="2px"
+                  borderBottomColor="gray.400"
                   fontSize="md"
                   fontWeight={700}
-                  color="gray.100">
+                  color="gray.600">
                   Tipos
                 </Text>
                 <HStack flexDirection="row" wrap="wrap" spacing="2">
@@ -178,7 +180,7 @@ export default function PokemonData({ pokemon, isCatched }: IPokemonData) {
                     <Text
                       key={`${item.type.name}${index}`}
                       textTransform="capitalize"
-                      color="gray.100">
+                      color="gray.600">
                       {item.type.name}
                     </Text>
                   ))}
@@ -191,16 +193,32 @@ export default function PokemonData({ pokemon, isCatched }: IPokemonData) {
                 key={index}
                 spacing="5"
                 p="5"
-                bg="gray.100"
+                bg="gray.50"
                 borderRadius="xl">
                 <Stack w="100%">
-                  <Text fontSize="xs" textTransform="capitalize">
+                  <Text
+                    fontSize="xs"
+                    textTransform="capitalize"
+                    fontWeight="bold"
+                    align="start"
+                    color="gray.600">
                     {item.stat.name}
                   </Text>
                   <Progress
-                    bg="gray.300"
                     borderRadius="full"
                     value={item.base_stat}
+                    bg="gray.300"
+                    colorScheme={
+                      item.base_stat > 80
+                        ? "green"
+                        : item.base_stat > 60
+                        ? "teal"
+                        : item.base_stat > 40
+                        ? "yellow"
+                        : item.base_stat > 20
+                        ? "orange"
+                        : "red"
+                    }
                   />
                 </Stack>
               </Stack>

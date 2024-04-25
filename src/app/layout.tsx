@@ -4,6 +4,8 @@ import "./globals.css";
 import { ChakraProvider } from "@chakra-ui/react";
 import { pokemonbyUser } from "@/lib/actions/getdb";
 import Navbar from "@/components/Navbar";
+import { cookies } from "next/headers";
+import { createClient } from "@/lib/supabase/server";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,13 +24,24 @@ export default async function RootLayout({
 }>) {
   const pokemons = await pokemonbyUser();
   if (!pokemons) {
-    <div>Sorry, something went wrong</div>;
+    <div>{pokemons?.[0]}</div>;
   }
+
+  const cookieStore = cookies();
+  const supabase = createClient(cookieStore);
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
   return (
     <html lang="en">
-      <body className={inter.className} style={{ background: "black" }}>
+      <body className={inter.className} style={{ background: "#E53E3E" }}>
         <ChakraProvider>
-          <Navbar pokemons={pokemons || []} />
+          <Navbar
+            pokemons={pokemons || []}
+            user={user === null ? null : user}
+          />
           {children}
         </ChakraProvider>
       </body>

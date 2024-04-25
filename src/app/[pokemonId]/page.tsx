@@ -19,9 +19,11 @@ export default async function PokemonId({
   }
 
   return (
-    <PokemonData
-      pokemon={pokemon}
-      isCatched={isPokemonCatched === "true" ?? false}
-    />
+    <Stack w="100%">
+      <PokemonData
+        pokemon={pokemon}
+        isCatched={isPokemonCatched === "true" ?? false}
+      />
+    </Stack>
   );
 }
