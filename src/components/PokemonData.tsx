@@ -75,9 +75,11 @@ export default function PokemonData({ pokemon, isCatched }: IPokemonData) {
             <Alert status="error">
               <AlertIcon />
               <AlertTitle>
-                Sorry, something went wrong trying to catch the pokemon.
+                Oops! Algo salió mal al intentar atrapar a tu pokemon.
               </AlertTitle>
-              <AlertDescription>{resSuccess}</AlertDescription>
+              <AlertDescription>
+                {resSuccess} Intenta checkear si estas logueado.
+              </AlertDescription>
             </Alert>
           )}
 
@@ -100,11 +102,11 @@ export default function PokemonData({ pokemon, isCatched }: IPokemonData) {
                   fontSize="md"
                   fontWeight={700}
                   color="gray.800">
-                  Is catched!
+                  Atrapado!
                 </Text>
               ) : (
                 <Button name="chatch" onClick={handleChange} colorScheme="red">
-                  🖐️ catch!
+                  🖐️ Atrapar!
                 </Button>
               )}
             </Box>

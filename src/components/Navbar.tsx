@@ -18,6 +18,7 @@ import { deletePokemon } from "@/lib/actions/delete";
 import Image from "next/image";
 import Link from "next/link";
 import image from "/public/ball.png";
+import { signOut } from "@/lib/actions/auth";
 
 export default function Navbar({ pokemons, user }: any) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -39,14 +40,24 @@ export default function Navbar({ pokemons, user }: any) {
           Pokedex
         </Link>
         {user ? (
-          <Button ref={btnRef} bg="orange.200" onClick={onOpen} py="6" px="2">
-            <Image
-              src={image}
-              alt="pokeball to see catched pokemons"
-              width={40}
-              height={40}
-            />
-          </Button>
+          <Stack direction={["column", "row"]} alignItems={"center"}>
+            <Button ref={btnRef} bg="orange.200" onClick={onOpen} py="6" px="2">
+              <Image
+                src={image}
+                alt="pokeball to see catched pokemons"
+                width={40}
+                height={40}
+              />
+            </Button>
+            <form action={signOut}>
+              <Button
+                type="submit"
+                backgroundColor="transparent"
+                textDecoration="underline">
+                Signout
+              </Button>
+            </form>
+          </Stack>
         ) : (
           <Stack direction={"row"} color="white" alignItems={"center"}>
             <Link
@@ -84,7 +95,7 @@ export default function Navbar({ pokemons, user }: any) {
 
           <DrawerBody>
             {pokemons.length === 0 ? (
-              <></>
+              <Text>Aun no has atrapado a tus pokemones favoritos</Text>
             ) : (
               pokemons?.map((pokemon: any, index: number) => (
                 <Stack direction={"column"} key={pokemon.id + index} pb="8">

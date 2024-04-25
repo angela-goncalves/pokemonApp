@@ -79,11 +79,7 @@ const PokemonsList = ({ initialPokemons }: IHomePage) => {
           })}
         </SimpleGrid>
       </Stack>
-      <Button
-        onClick={loadMorePokemons}
-        bg="transparent"
-        color="gray.50"
-        textDecoration={"underline"}>
+      <Button onClick={loadMorePokemons} bg="white" color="black" my="20">
         Cargar más
       </Button>
     </Flex>
