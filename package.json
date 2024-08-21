@@ -14,7 +14,7 @@
     "@emotion/styled": "^11.11.5",
     "@supabase/ssr": "^0.3.0",
     "@supabase/supabase-js": "^2.42.5",
-    "axios": "^1.6.8",
+    "axios": "^1.7.4",
     "framer-motion": "^11.1.7",
     "next": "14.2.2",
     "node-json-db": "^2.3.0",
